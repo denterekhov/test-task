@@ -1,0 +1,162 @@
+@import '../../theme/breakpoints';
+
+.users {
+  padding-top: 140px;
+  overflow: hidden;
+
+  & h2 {
+    color: var(--paletteColor1);
+    font-family: Overpass, sans-serif;
+    font-size: 42px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  & h4 {
+    margin-top: 20px;
+    color: var(--paletteColor1);
+    font-family: Overpass, sans-serif;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  & .userList {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+  }
+
+  & .userItem {
+    margin: 63px 0 0 0;
+    width: 31%;
+    display: flex;
+    min-width: 0;
+
+    & .userPhotoContainer {
+      width: 70px;
+      height: 70px;
+    }
+
+    & .userPhoto {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+    }
+
+    & .userInfo {
+      margin: 28px 0 0 10px;
+      min-width: 0;
+      color: var(--paletteColor4);
+      font-family: SourceSansPro, sans-serif;
+      font-size: 14px;
+
+      & h5 {
+        margin-bottom: 12px;
+        color: var(--paletteColor1);
+        font-family: Overpass, sans-serif;
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 24px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      & a {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-decoration: none;
+        line-height: 25px;
+        color: var(--paletteColor4);
+      }
+    }
+  }
+
+  & .getMoreUsers {
+    margin: 55px auto 0;
+    display: block;
+    max-width: 290px;
+    height: 40px;
+    border: 2px solid var(--paletteColor3);
+    border-radius: 4px;
+    color: var(--paletteColor3);
+    font-family: SourceSansPro, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 34px;
+    text-decoration: none;
+  }
+  @media(--tablet) {
+    padding-top: 120px;
+
+    & h4 {
+      margin: 20px auto 40px;
+    }
+
+    & .userItem {
+      margin: 0 0 32px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      & .userInfo {
+        margin: 14px 0 0 0;
+        max-width: 100%;
+        
+        & h5 {
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    & .getMoreUsers {
+      margin: 27px auto 0;
+    }
+  }
+
+  @media(--phone) {
+    padding-top: 70px;
+
+    & h2 {
+      font-size: 26px;
+    }
+
+    & h4 {
+      width: 60%;
+      margin: 18px auto 0;
+      font-size: 16px;
+      line-height: 20px;
+    }
+
+    & .userList {
+      flex-direction: column;
+    }
+
+    & .userItem {
+      margin: 27px 0 0;
+      width: 100%;
+      flex-direction: column;
+      text-align: center;
+
+      & .userPhotoContainer {
+        margin: 0 auto;
+      }
+
+      & .userInfo {
+        max-width: 100%;
+        margin: 17px auto 0;
+
+        & h5 {
+          margin-bottom: 5px;
+        }
+
+        & a {
+          line-height: 22px;
+        }
+      }
+    }
+  }
+}

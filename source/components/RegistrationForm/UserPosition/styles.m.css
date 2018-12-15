@@ -1,0 +1,53 @@
+@import '../../../theme/breakpoints';
+
+.userPosition {
+  width: 48%;
+  height: 56px;
+  font-family: SourceSansPro, sans-serif;
+  font-size: 16px;
+  border: 1px solid var(--paletteColor5);
+  border-radius: 4px;
+  cursor: pointer;
+
+  & .positionListHeader {
+    padding: 0 15px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  & .positionList {
+    position: relative;
+    width: 100%;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 0 4px;
+    background-color: var(--paletteColor2);
+    z-index: 1;
+
+    & .positionListItem {
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.1s ease;
+
+      &:hover {
+        background-color: var(--paletteColor11);
+      }
+    }
+
+    & .positionListItemSelected {
+      color: var(--paletteColor10);
+    }
+  }
+
+  & .hideMenu {
+    display: none;
+  }
+
+  @media(--phone) {
+    width: 100%;
+    margin-top: 34px;
+  }
+}

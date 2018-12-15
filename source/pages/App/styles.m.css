@@ -1,0 +1,47 @@
+@import '../../theme/breakpoints';
+
+.modal {
+  position: absolute;
+  margin: auto;
+  width: 290px;
+  height: 180px;
+  padding: 25px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--paletteColor2);
+  font-family: Overpass, sans-serif;
+
+  & h4 {
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  & p {
+    margin-top: 10px;
+    font-size: 16px;
+    font-family: SourceSansPro, sans-serif;
+    line-height: 20px;
+  }
+
+  & a {
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
+    text-decoration: none;
+    font-family: SourceSansPro, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--paletteColor3);
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+}

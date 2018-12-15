@@ -1,0 +1,230 @@
+@import '../../theme/breakpoints';
+
+.registrationForm {
+  height: 700px;
+  padding-top: 165px;
+  overflow: hidden;
+
+  & h2 {
+    color: var(--paletteColor1);
+    font-family: Overpass, sans-serif;
+    font-size: 42px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  & h4 {
+    margin-top: 20px;
+    color: var(--paletteColor1);
+    font-family: SourceSansPro, sans-serif;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  & .formContainer {
+    height: 150px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-content: space-between;
+    margin-top: 62px;
+  }
+
+  & .displayErrors {
+    & .inputTextWrapper {
+      & input:invalid {
+        border: 1px solid var(--paletteColor12);
+
+        &:focus {
+          border: 2px solid var(--paletteColor12);
+        }
+
+        & + label {
+          color: var(--paletteColor12);
+        }
+      }
+    }
+  }
+
+  & .inputTextWrapper {
+    width: 31%;
+    position: relative;
+    display: inline-block;
+
+    & label {
+      display: block;
+      position: absolute;
+      top: -6px;
+      left: 10px;
+      background-color: var(--paletteColor2);
+      width: 40px;
+      height: 9px;
+      color: var(--paletteColor6);
+      font-family: SourceSansPro, sans-serif;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    & input {
+      padding-left: 15px;
+      width: 100%;
+      height: 56px;
+      font-size: 15px;
+      color: var(--paletteColor1);
+      border: 1px solid var(--paletteColor5);
+      border-radius: 4px;
+
+      &:focus {
+        border: 2px solid var(--paletteColor5);
+        outline: 0;
+      }
+
+      & ::placeholder {
+        color: var(--paletteColor6);
+        font-family: SourceSansPro, sans-serif;
+      }
+    }
+  }
+
+  & .fileName {
+    width: calc(100% - 65px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 15px;
+    font-family: SourceSansPro, sans-serif;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--paletteColor6);
+  }
+
+  & input[type="submit"] {
+    margin: 60px auto 0;
+    display: block;
+    max-width: 100%;
+    width: 290px;
+    height: 40px;
+    background-color: var(--paletteColor3);
+    color: var(--paletteColor2);
+    border: none;
+    border-radius: 4px;
+    font-family: SourceSansPro, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    outline: 0;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--paletteColor10);
+    }
+
+    &:disabled {
+      background-color: var(--paletteColor7);
+      color: var(--paletteColor6);
+      cursor: auto;
+    }
+  }
+
+  & .inputFileWrapper {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 48%;
+    height: 56px;
+    border: 1px solid var(--paletteColor5);
+    border-radius: 4px;
+  }
+
+  & .fileUpload {
+    display: block;
+    margin-right: -1px;
+    width: 160px;
+    height: 56px;
+    border: 2px solid var(--paletteColor3);
+    border-radius: 0px 4px 4px 0px;
+    color: var(--paletteColor3);
+    font-family: SourceSansPro, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--paletteColor11);
+    }
+  }
+
+  & .fileInput {
+    position: absolute;
+    opacity: 0;
+    font-size: 0;
+  }
+
+  & .fileUploadAssistiveText {
+    position: absolute;
+    top: 60px;
+    left: 15px;
+    color: var(--paletteColor6);
+    font-family: SourceSansPro, sans-serif;
+    font-size: 12px;
+  }
+
+  @media(--tablet) {
+    height: 673px;
+    padding-top: 138px;
+
+    & h4 {
+      margin: 28px auto 0;
+      max-width: 365px;
+      line-height: 20px;
+    }
+
+    & .formContainer {
+      margin-top: 55px;
+    }
+  }
+
+  @media(--phone) {
+    height: 800px;
+    padding-top: 70px;
+
+    & h2 {
+      font-size: 26px;
+    }
+
+    & h4 {
+      margin-top: 14px;
+      font-size: 16px;
+      line-height: 22px;
+    }
+
+    & .formContainer {
+      height: 100%;
+      margin-top: 0;
+      flex-direction: column;
+
+      & .inputTextWrapper,
+      & .inputFileWrapper {
+        width: 100%;
+        margin-top: 34px;
+      }
+    }
+
+    & .fileUpload {
+      width: 56px;
+      color: transparent;
+      background: url(../../theme/assets/icons/upload.svg) 50% 50% no-repeat ;
+    }
+
+    & .fileUploadAssistiveText {
+      max-width: 225px;
+    }
+
+    & input[type="submit"] {
+      margin-top: 65px;
+    }
+  }
+}

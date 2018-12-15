@@ -1,0 +1,19 @@
+:root {
+  /* HEX */
+  --paletteColor1: #000;
+  --paletteColor2: #fff;
+  --paletteColor3: #ef6c00;
+  --paletteColor4: #4c4b4b;
+  --paletteColor5: #b7b7b7;
+  --paletteColor6: #8d8c8c;
+  --paletteColor7: #d7d7d7;
+  --paletteColor8: #283593;
+  --paletteColor9: #fefefe;
+  --paletteColor10: #fc831f;
+  --paletteColor11: #fee6d2;
+  --paletteColor12: #f00;
+
+  /* RGBA */
+  --rgbaColor1: rgba(0, 0, 0, 0.1);
+  --rgbaColor2: rgba(0, 0, 0, 0.2);
+}

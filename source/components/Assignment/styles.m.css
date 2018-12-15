@@ -1,0 +1,109 @@
+@import '../../theme/breakpoints';
+
+.assignment {
+  height: 726px;
+  margin-top: 64px;
+  padding-top: 133px;
+  background-image: url(../../theme/assets/bg-1.jpg);
+  /* there's no another image provided for retina displays */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
+    background-image: url(../../theme/assets/bg-1.jpg);
+  }
+  background-size: 129% auto;
+  background-repeat: no-repeat;
+
+  & h1 {
+    max-width: 450px;
+    color: var(--paletteColor2);
+    font-family: Overpass, sans-serif;
+    font-size: 50px;
+    line-height: 60px;
+    font-weight: 600;
+  }
+
+  & .visibleText {
+    display: block;
+    max-width: 450px;
+    margin-top: 18px;
+    color: var(--paletteColor2);
+    font-family: SourceSansPro, sans-serif;
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  & a {
+    display: block;
+    margin-top: 40px;
+    max-width: 290px;
+    height: 40px;
+    font-family: SourceSansPro, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 36px;
+    color: var(--paletteColor2);
+    background-color: var(--paletteColor3);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--paletteColor10);
+    }
+  }
+
+  @media(--tablet) {
+    height: 622px;
+    padding-top: 115px;
+    background-size: auto 100%;
+
+    & h1 {
+      font-size: 42px;
+      line-height: 50px;
+    }
+    & .visibleText {
+      max-width: 400px;
+      font-size: 18px;
+      line-height: 24px;
+    }
+    & a {
+      margin-top: 35px;
+    }
+  }
+
+  @media(--phone) {
+    height: 393px;
+    padding-top: 67px;
+    text-align: center;
+    background-position: 39% 0;
+    background-size: 198% auto;
+
+    & h1 {
+      width: 100%;
+      font-size: 30px;
+      line-height: 34px;
+    }
+
+    & .visibleText {
+      margin: 9px auto 0;
+      width: 94%;
+      height: 67px;
+      overflow: hidden;
+      font-size: 16px;
+      line-height: 23px;
+      
+      & .invisibleText {
+        display: none;
+      }
+    }
+
+    & a {
+      margin: 38px auto;
+    }
+  }
+
+  @media(--largeDesktop) {
+    background-size: 100% auto;
+    background-position: 0 25%;
+  }
+}
