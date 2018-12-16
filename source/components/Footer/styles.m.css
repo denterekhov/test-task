@@ -3,22 +3,22 @@
 .footer {
   margin: 0 auto;
   overflow: hidden;
-  background-color: var(--paletteColor8);
+  background-color: #283593;
   font-family: SourceSansPro, sans-serif;
   
   & a {
-    color: var(--paletteColor2);
+    color: #fff;
     text-decoration: none;
     transition: color 0.2s ease;
 
     &:hover {
-      color: var(--paletteColor3);
+      color: #ef6c00;
     }
   }
 
   & p {
     font-size: 12px;
-    color: var(--paletteColor2);
+    color: #fff;
   }
   
   & .contacts {
@@ -35,7 +35,7 @@
       line-height: 44px;
       overflow: hidden;
       text-overflow: ellipsis;
-      color: var(--paletteColor2);
+      color: #fff;
     }
 
     & li:last-child {
@@ -100,13 +100,13 @@
       overflow: hidden;
       text-overflow: ellipsis;
       line-height: 17px;
-      color: var(--paletteColor2);
+      color: #fff;
 
       & a {
-        color: var(--paletteColor2);
+        color: #fff;
 
         &:hover {
-          color: var(--paletteColor3);
+          color: #ef6c00;
         }
       }
     }

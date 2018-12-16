@@ -6,7 +6,7 @@
   overflow: hidden;
 
   & h2 {
-    color: var(--paletteColor1);
+    color: #000;
     font-family: Overpass, sans-serif;
     font-size: 42px;
     font-weight: 600;
@@ -31,7 +31,7 @@
 
     & h3 {
       margin: 22px 0 10px;
-      color: var(--paletteColor1);
+      color: #000;
       font-family: Overpass, sans-serif;
       font-size: 26px;
       font-weight: 600;
@@ -39,7 +39,7 @@
 
     & p {
       margin-bottom: 20px;
-      color: var(--paletteColor4);
+      color: #4c4b4b;
       font-family: SourceSansPro, sans-serif;
       font-size: 16px;
       line-height: 23px;
@@ -50,7 +50,7 @@
     display: block;
     width: 75px;
     height: 24px;
-    color: var(--paletteColor3);
+    color: #ef6c00;
     font-family: SourceSansPro, sans-serif;
     font-size: 22px;
     font-weight: 700;
@@ -58,7 +58,7 @@
     transition: color 0.2s ease;
 
     &:hover {
-      color: var(--paletteColor10);
+      color: #fc831f;
     }
   }
 

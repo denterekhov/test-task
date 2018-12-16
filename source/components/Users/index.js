@@ -1,10 +1,17 @@
 // Core
 import React, { Component } from "react";
+import PropTypes from 'prop-types'
 
 // Instruments
 import Styles from "./styles.m.css";
 
 export default class Users extends Component {
+  static propTypes = {
+    users: PropTypes.array.isRequired,
+    nextUrl: PropTypes.string.isRequired,
+    _usersFetch: PropTypes.func.isRequired,
+  }
+
   componentDidMount() {
     this.props._usersFetch();
   }

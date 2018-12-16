@@ -6,7 +6,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: var(--paletteColor2);
+  background-color: #fff;
 
   & .flex_container {
     height: 64px;
@@ -42,13 +42,13 @@
       & li {
         & a {
           text-decoration: none;
-          color: var(--paletteColor1);
+          color: #000;
           font-family: SourceSansPro, sans-serif;
           font-size: 16px;
           transition: color 0.2s ease;
 
           &:hover {
-            color: var(--paletteColor3);
+            color: #ef6c00;
           }
         }
       }
@@ -76,7 +76,7 @@
       }
 
       & a {
-        color: var(--paletteColor6);
+        color: #8d8c8c;
         font-size: 12px;
         text-decoration: none;
       }
@@ -120,7 +120,7 @@
       left: 0;
       width: 250px;
       height: 100%;
-      background-color: var(--paletteColor2);
+      background-color: #fff;
       transition: transform 0.3s ease-in;
 
       & nav {

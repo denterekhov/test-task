@@ -1,5 +1,6 @@
 // Core
 import React, { Component } from "react";
+import PropTypes from 'prop-types'
 
 // Instruments
 import axios from "axios";
@@ -11,6 +12,10 @@ import Styles from "./styles.m.css";
 import UserPosition from "./UserPosition";
 
 export default class RegistrationForm extends Component {
+  static propTypes = {
+    _handleOpenModalAndFetch: PropTypes.func.isRequired,
+  }
+
   state = {
     token: "",
     name: "",

@@ -10,7 +10,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--paletteColor2);
+  background-color: #fff;
   font-family: Overpass, sans-serif;
 
   & h4 {
@@ -33,7 +33,7 @@
     font-family: SourceSansPro, sans-serif;
     font-size: 20px;
     font-weight: 600;
-    color: var(--paletteColor3);
+    color: #ef6c00;
   }
 }
 

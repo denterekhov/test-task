@@ -1,5 +1,6 @@
 // Core
 import React, { Component } from "react";
+import PropTypes from 'prop-types'
 
 // Instruments
 import cx from "classnames";
@@ -9,6 +10,12 @@ import { API_URL as URL } from "../../../instruments/helpers";
 import Styles from "./styles.m.css";
 
 export default class UserPosition extends Component {
+  static propTypes = {
+    position_id: PropTypes.string.isRequired,
+    positionName: PropTypes.string.isRequired,
+    _handleSelectPosition: PropTypes.func.isRequired,
+  }
+
   state = {
     positions: [],
     isPositionListShown: false
