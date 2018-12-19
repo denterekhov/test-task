@@ -90,11 +90,11 @@ export default class App extends Component {
   };
 
   render() {
-    const { users, nextUrl } = this.state;
+    const { showModal, users, nextUrl } = this.state;
     return (
       <>
         <Modal
-          isOpen={this.state.showModal}
+          isOpen={showModal}
           onRequestClose={this._handleCloseModal}
           className={Styles.modal}
           overlayClassName={Styles.overlay}
