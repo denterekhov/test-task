@@ -4,12 +4,13 @@
   height: 755px;
   padding-top: 140px;
   overflow: hidden;
-  background: url(../../theme/assets/bg-2.jpg) 50% 0 no-repeat;
-  background-size: cover;
-  /* there's no another image provided for retina displays */
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
-    background-image: url(../../theme/assets/bg-2.jpg);
+  background-image: url(../../theme/assets/bg-2.jpg?size=2560);
+  @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) { 
+    background-image: url(../../theme/assets/bg-2.jpg?size=5120);
   }
+  background-size: cover;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
 
   & h2 {
     text-align: center;
@@ -31,7 +32,7 @@
     & p {
       margin-bottom: 22px;
       color: #fefefe;
-      font-family: SourceSansPro, sans-serif;
+      font-family: 'Source Sans Pro', sans-serif;
       font-size: 16px;
       line-height: 22px;
     }
@@ -47,6 +48,10 @@
     min-height: 875px;
     height: 100%;
     padding-top: 115px;
+    background-image: url(../../theme/assets/bg-2.jpg?size=768);
+    @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) { 
+      background-image: url(../../theme/assets/bg-2.jpg?size=1536);
+    }
 
     & h2 {
       margin: 0 auto;
@@ -71,6 +76,10 @@
   @media(--phone) {
     min-height: 1032px;
     padding-top: 70px;
+    background-image: url(../../theme/assets/bg-2.jpg?size=480);
+    @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) { 
+      background-image: url(../../theme/assets/bg-2.jpg?size=960);
+    }
 
     & h2 {
       font-size: 26px;

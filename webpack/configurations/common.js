@@ -9,6 +9,7 @@ import { source, build } from '../paths';
 import {
     loadJavaScript,
     loadFonts,
+    loadSvgImages,
     loadImages,
     setupHtml,
     setupContextReplacement,
@@ -36,6 +37,7 @@ export const generateCommonConfiguration = () => {
         // Loaders
         loadJavaScript(),
         loadFonts(),
+        loadSvgImages(),
         loadImages(),
 
         // Plugins

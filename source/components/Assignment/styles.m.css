@@ -4,10 +4,9 @@
   height: 726px;
   margin-top: 64px;
   padding-top: 133px;
-  background-image: url(../../theme/assets/bg-1.jpg);
-  /* there's no another image provided for retina displays */
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
-    background-image: url(../../theme/assets/bg-1.jpg);
+  background-image: url(../../theme/assets/bg-1.jpg?size=2560);
+  @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) { 
+    background-image: url(../../theme/assets/bg-1.jpg?size=5120);
   }
   background-size: 129% auto;
   background-repeat: no-repeat;
@@ -26,7 +25,7 @@
     max-width: 450px;
     margin-top: 18px;
     color: #fff;
-    font-family: SourceSansPro, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 20px;
     line-height: 26px;
   }
@@ -36,7 +35,7 @@
     margin-top: 40px;
     max-width: 290px;
     height: 40px;
-    font-family: SourceSansPro, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 20px;
     font-weight: 700;
     text-align: center;
@@ -55,6 +54,10 @@
   @media(--tablet) {
     height: 622px;
     padding-top: 115px;
+    background-image: url(../../theme/assets/bg-1.jpg?size=768);
+    @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) { 
+      background-image: url(../../theme/assets/bg-1.jpg?size=1536);
+    }
     background-size: auto 100%;
 
     & h1 {
@@ -75,6 +78,10 @@
     height: 393px;
     padding-top: 67px;
     text-align: center;
+    background-image: url(../../theme/assets/bg-1.jpg?size=480);
+    @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) { 
+      background-image: url(../../theme/assets/bg-1.jpg?size=960);
+    }
     background-position: 39% 0;
     background-size: 198% auto;
 

@@ -1,22 +1,16 @@
 @import './breakpoints';
 
 @font-face {
-  font-family: 'SourceSansPro';
-  src: url('./assets/fonts/SourceSansPro-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+  font-family: 'Source Sans Pro';
+  font-display: swap;
+  src: local('Source Sans Pro'), url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700);
 }
-@font-face {
-  font-family: 'SourceSansPro';
-  src: url('./assets/fonts/SourceSansPro-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
+
 @font-face {
   font-family: 'Overpass';
-  src: url('./assets/fonts/Overpass-SemiBold.ttf') format('truetype');
+  font-display: swap;
+  src: local('Overpass'), url(https://fonts.googleapis.com/css?family=Overpass:600);
   font-weight: 600;
-  font-style: normal;
 }
 
 * {

@@ -21,7 +21,7 @@
   & p {
     margin-top: 10px;
     font-size: 16px;
-    font-family: SourceSansPro, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     line-height: 20px;
   }
 
@@ -30,7 +30,7 @@
     right: 25px;
     bottom: 25px;
     text-decoration: none;
-    font-family: SourceSansPro, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 20px;
     font-weight: 600;
     color: #ef6c00;

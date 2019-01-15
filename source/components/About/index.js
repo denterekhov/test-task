@@ -23,7 +23,7 @@ export default class About extends Component {
               </p>
               <p>
                 Last week, Google Search and Ads teams announced two new speed
-                initiatives to help improve user-experience on the web.{" "}
+                initiatives to help improve user-experience on the web. 
               </p>
               <a href="#signup">Sign Up</a>
             </div>

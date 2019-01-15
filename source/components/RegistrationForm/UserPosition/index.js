@@ -42,7 +42,7 @@ export default class UserPosition extends Component {
         });
       }
     } catch (err) {
-      console.log(err.message);
+      console.error(err.message);
     }
   };
 

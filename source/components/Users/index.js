@@ -1,6 +1,7 @@
 // Core
 import React, { Component } from "react";
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import ReactOverflowTooltip from 'react-overflow-tooltip';
 
 // Instruments
 import Styles from "./styles.m.css";
@@ -20,24 +21,25 @@ export default class Users extends Component {
     const { users, nextUrl, _usersFetch } = this.props;
     const userList = users.map(user => {
       const { id, email, name, phone, photo, position } = user;
-      const formattedPhoneNumber = `${phone.slice(0, 3)} (${phone.slice(
-        3,
-        6
-      )}) ${phone.slice(6, 9)} ${phone.slice(9, 11)} ${phone.slice(11, 13)}`;
+      const formattedPhoneNumber = `${phone.slice(0, 3)} (${phone.slice(3, 6)}) ${phone.slice(6, 9)} ${phone.slice(9, 11)} ${phone.slice(11, 13)}`;
       return (
         <div className={Styles.userItem} key={id}>
           <div className={Styles.userPhotoContainer}>
             <img
               className={Styles.userPhoto}
               src={photo}
-              srcSet={`${photo} 2x`}
+              srcSet={`${photo} 1x, ${photo} 2x`}
               alt={name}
             />
           </div>
           <div className={Styles.userInfo}>
-            <h5>{name}</h5>
+            <ReactOverflowTooltip title={name}>
+              <h5>{name}</h5>
+            </ReactOverflowTooltip>
             <p>{position}</p>
-            <a href={`mailto:${email}`}>{email}</a>
+            <ReactOverflowTooltip title={email}>
+              <a href={`mailto:${email}`}>{email}</a>
+            </ReactOverflowTooltip>
             <p>{formattedPhoneNumber}</p>
           </div>
         </div>

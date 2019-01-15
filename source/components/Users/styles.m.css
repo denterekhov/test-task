@@ -48,7 +48,7 @@
       margin: 28px 0 0 10px;
       min-width: 0;
       color: #4c4b4b;
-      font-family: SourceSansPro, sans-serif;
+      font-family: 'Source Sans Pro', sans-serif;
       font-size: 14px;
 
       & h5 {
@@ -82,7 +82,7 @@
     border: 2px solid #ef6c00;
     border-radius: 4px;
     color: #ef6c00;
-    font-family: SourceSansPro, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 20px;
     font-weight: 700;
     text-align: center;

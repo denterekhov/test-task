@@ -23,11 +23,11 @@ export const loadFonts = () => ({
     },
 });
 
-export const loadImages = () => ({
+export const loadSvgImages = () => ({
     module: {
         rules: [
             {
-                test:    /\.jpe?g|png|svg$/,
+                test:    /\.svg$/,
                 include: source,
                 use:  [
                         {
@@ -37,22 +37,40 @@ export const loadImages = () => ({
                               limit:    8192,
                               name:     'images/[name].[hash:5].[ext]',
                           },
-                          
                         }, 
                         {
                           loader: 'image-webpack-loader',
                           options: {
                               disable: false, 
-                              mozjpeg: {
-                                progressive: true,
-                                quality: 70,
-                              },
                           },
                         },
                 ]
             }
         ],
     },
+});
+
+export const loadImages = () => ({
+  module: {
+    rules: [
+      {
+        test: /\.(jpe?g|png)$/i,
+        include: source,
+        use:  [
+                {
+                  loader: 'responsive-loader',
+                  options: {
+                    adapter: require('responsive-loader/sharp'),
+                    name: 'images/[name].[hash:5]-[width].[ext]',
+                    quality: 75,
+                    placeholder: true,
+                    placeholderSize: 50
+                  }
+                },
+        ]
+      }
+    ]
+  }
 });
 
 export const setupHtml = () => ({
@@ -62,11 +80,15 @@ export const setupHtml = () => ({
             template: HtmlWebpackTemplate,
             title:    'abz.agency test task',
             favicon:  `${statics}/favicon/abz-favicon-512x512.png`,
-            meta:     [
-                {
-                    name:    'viewport',
-                    content: 'user-scalable=no, width=device-width, initial-scale=1',
-                }
+            meta: [
+                    {
+                      name:     'description',
+                      content:  'Test task for abz.agency',
+                    },
+                    {
+                      name:     'viewport',
+                      content:  'user-scalable=no, width=device-width, initial-scale=1',
+                    }
             ],
             appMountIds: ['app'],
         })

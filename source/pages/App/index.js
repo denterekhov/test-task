@@ -26,13 +26,24 @@ export default class App extends Component {
   state = {
     showModal: false,
     users: [],
-    nextUrl: ""
+    nextUrl: "",
+    numberOfDisplayedUsers: null,
+  };
+
+  componentDidMount = async() => {
+    this._getWindowWidth();
+  }
+
+  _getWindowWidth = () => {
+    this.setState({ 
+      numberOfDisplayedUsers: window.innerWidth <= 480 ? 3 : 6,
+    });
   };
 
   _usersFetch = async event => {
     if (event) event.preventDefault();
-    const { nextUrl } = this.state;
-    const url = nextUrl ? nextUrl : `${URL}/users?page=1&count=6`;
+    const { nextUrl, numberOfDisplayedUsers } = this.state;
+    const url = nextUrl ? nextUrl : `${URL}/users?page=1&count=${numberOfDisplayedUsers}`;
     try {
       const response = await axios({
         method: "GET",
@@ -52,13 +63,14 @@ export default class App extends Component {
         }));
       }
     } catch (err) {
-      console.log(err.message);
+      console.error(err.message);
     }
   };
 
   _handleOpenModalAndFetch = async event => {
     if (event) event.preventDefault();
-    const url = `${URL}/users?page=1&count=6`;
+    const { numberOfDisplayedUsers } = this.state;
+    const url = `${URL}/users?page=1&count=${numberOfDisplayedUsers}`;
     try {
       const response = await axios({
         method: "GET",
@@ -79,7 +91,7 @@ export default class App extends Component {
         });
       }
     } catch (err) {
-      console.log(err.message);
+      console.error(err.message);
     }
   };
 
@@ -90,32 +102,32 @@ export default class App extends Component {
   };
 
   render() {
-    const { showModal, users, nextUrl } = this.state;
+    const { showModal, users, nextUrl, numberOfDisplayedUsers } = this.state;
     return (
-      <>
-        <Modal
-          isOpen={showModal}
-          onRequestClose={this._handleCloseModal}
-          className={Styles.modal}
-          overlayClassName={Styles.overlay}
-        >
-          <h4>Congratulations</h4>
-          <p>You have successfully passed the registration</p>
-          <a href="#" onClick={this._handleCloseModal}>
-            OK
-          </a>
-        </Modal>
-        <Header />
-        <Assignment />
-        <About />
-        <Relationships />
-        <Requirements />
-        <Users users={users} nextUrl={nextUrl} _usersFetch={this._usersFetch} />
-        <RegistrationForm
-          _handleOpenModalAndFetch={this._handleOpenModalAndFetch}
-        />
-        <Footer />
-      </>
-    );
+            <>
+              <Modal
+                isOpen={showModal}
+                onRequestClose={this._handleCloseModal}
+                className={Styles.modal}
+                overlayClassName={Styles.overlay}
+              >
+                <h4>Congratulations</h4>
+                <p>You have successfully passed the registration</p>
+                <a href="#" onClick={this._handleCloseModal}>
+                  OK
+                </a>
+              </Modal>
+              <Header />
+              <Assignment />
+              <About />
+              <Relationships />
+              <Requirements />
+              {numberOfDisplayedUsers && <Users users={users} nextUrl={nextUrl} _usersFetch={this._usersFetch} />}
+              <RegistrationForm
+                _handleOpenModalAndFetch={this._handleOpenModalAndFetch}
+              />
+              <Footer />
+            </>
+    )
   }
 }

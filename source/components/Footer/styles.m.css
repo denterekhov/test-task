@@ -4,7 +4,7 @@
   margin: 0 auto;
   overflow: hidden;
   background-color: #283593;
-  font-family: SourceSansPro, sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   
   & a {
     color: #fff;
@@ -132,6 +132,10 @@
   }
 
   @media(--tablet) {
+    & a {
+      font-size: calc(0.5rem + 1.1vw);
+    }
+
     & .footer_container {
       flex-wrap: wrap;
       padding: 0 25px;

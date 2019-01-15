@@ -48,7 +48,7 @@ export default class RegistrationForm extends Component {
         });
       }
     } catch (err) {
-      console.log(err.message);
+      console.error(err.message);
     }
   };
 
@@ -148,7 +148,7 @@ export default class RegistrationForm extends Component {
         }));
       }
     } catch (err) {
-      console.log(err.message);
+      console.error(err.message);
     }
   };
 

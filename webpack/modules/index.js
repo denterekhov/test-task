@@ -1,4 +1,4 @@
-export { loadFonts, loadImages, setupHtml } from './assets';
+export { loadFonts, loadImages, loadSvgImages, setupHtml } from './assets';
 export { loadPostCSS, loadDevelopmentCss, loadProductionCss } from './styles';
 export { loadJavaScript } from './code';
 export {

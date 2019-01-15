@@ -43,7 +43,7 @@ export default class Header extends Component {
         });
       }
     } catch (err) {
-      console.log(err.message);
+      console.error(err.message);
     }
   };
 
@@ -99,7 +99,7 @@ export default class Header extends Component {
                   </li>
                 </ul>
               </nav>
-              <div className={Styles.currentUser}>
+              {email && <div className={Styles.currentUser}>
                 <div className={Styles.userInfo}>
                   <p>{name}</p>
                   <a href={`mailto:${email}`}>{email}</a>
@@ -107,7 +107,7 @@ export default class Header extends Component {
                 <img
                   className={Styles.userAvatar}
                   src={photo}
-                  srcSet={`${photo} 2x`}
+                  srcSet={`${photo} 1x, ${photo} 2x`}
                   alt="User"
                 />
                 <LogOut
@@ -116,7 +116,7 @@ export default class Header extends Component {
                   color2="#2638bb"
                   color3="#939ac9"
                 />
-              </div>
+              </div>}
             </div>
             <a
               href="#"

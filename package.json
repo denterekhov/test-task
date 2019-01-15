@@ -27,11 +27,14 @@
         "@babel/runtime": "^7.2.0",
         "axios": "^0.18.0",
         "classnames": "~2.2.6",
+        "formik": "^1.4.2",
         "react": "~16.4.1",
         "react-dom": "~16.4.1",
         "react-flip-move": "~3.0.2",
         "react-modal": "^3.7.1",
-        "reset-css": "~4.0.1"
+        "react-overflow-tooltip": "^2.0.1",
+        "reset-css": "~4.0.1",
+        "yup": "^0.26.7"
     },
     "devDependencies": {
         "@babel/core": "~7.0.0-beta.54",
@@ -84,6 +87,8 @@
         "prop-types": "^15.6.2",
         "react-dev-utils": "~5.0.1",
         "react-hot-loader": "~4.3.3",
+        "responsive-loader": "^1.2.0",
+        "sharp": "^0.21.1",
         "style-loader": "~0.21.0",
         "stylelint": "~9.3.0",
         "url-loader": "~1.0.1",

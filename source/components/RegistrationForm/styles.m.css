@@ -16,7 +16,7 @@
   & h4 {
     margin-top: 20px;
     color: #000;
-    font-family: SourceSansPro, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 18px;
     text-align: center;
   }
@@ -60,7 +60,7 @@
       width: 40px;
       height: 9px;
       color: #8d8c8c;
-      font-family: SourceSansPro, sans-serif;
+      font-family: 'Source Sans Pro', sans-serif;
       font-size: 12px;
       text-align: center;
     }
@@ -81,7 +81,7 @@
 
       & ::placeholder {
         color: #8d8c8c;
-        font-family: SourceSansPro, sans-serif;
+        font-family: 'Source Sans Pro', sans-serif;
       }
     }
   }
@@ -91,7 +91,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     padding-left: 15px;
-    font-family: SourceSansPro, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 16px;
     line-height: 17px;
     color: #8d8c8c;
@@ -107,7 +107,7 @@
     color: #fff;
     border: none;
     border-radius: 4px;
-    font-family: SourceSansPro, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 20px;
     font-weight: 700;
     cursor: pointer;
@@ -144,7 +144,7 @@
     border: 2px solid #ef6c00;
     border-radius: 0px 4px 4px 0px;
     color: #ef6c00;
-    font-family: SourceSansPro, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 20px;
     font-weight: 700;
     text-align: center;
@@ -168,7 +168,7 @@
     top: 60px;
     left: 15px;
     color: #8d8c8c;
-    font-family: SourceSansPro, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 12px;
   }
 
