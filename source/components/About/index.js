@@ -12,7 +12,7 @@ export default class About extends Component {
           <h2>Let's get acquainted</h2>
           <div className={Styles.flex_container}>
             <div className={Styles.manMobile} />
-            <div className={Styles.mySkils}>
+            <div className={Styles.mySkills}>
               <h3>I am cool frontend developer</h3>
               <p>
                 When real users have a slow experience on mobile, they're much

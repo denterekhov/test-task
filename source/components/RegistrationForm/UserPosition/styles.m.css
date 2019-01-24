@@ -1,12 +1,9 @@
 @import '../../../theme/breakpoints';
 
 .userPosition {
-  width: 48%;
-  height: 56px;
+  height: 100%;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 16px;
-  border: 1px solid #b7b7b7;
-  border-radius: 4px;
   cursor: pointer;
 
   & .positionListHeader {
@@ -48,6 +45,5 @@
 
   @media(--phone) {
     width: 100%;
-    margin-top: 34px;
   }
 }

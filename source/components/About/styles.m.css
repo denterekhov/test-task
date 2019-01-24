@@ -25,7 +25,7 @@
       background: url(../../theme/assets/man-mobile.svg) no-repeat;
     }
     
-    & .mySkils {
+    & .mySkills {
       width: 66%;
     }
 
@@ -88,7 +88,7 @@
         background-position: 50% 0;
       }
 
-      & .mySkils {
+      & .mySkills {
         width: 100%;
         text-align: center;
 

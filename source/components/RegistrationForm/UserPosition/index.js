@@ -1,6 +1,6 @@
 // Core
 import React, { Component } from "react";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
 // Instruments
 import cx from "classnames";
@@ -10,12 +10,6 @@ import { API_URL as URL } from "../../../instruments/helpers";
 import Styles from "./styles.m.css";
 
 export default class UserPosition extends Component {
-  static propTypes = {
-    position_id: PropTypes.string.isRequired,
-    positionName: PropTypes.string.isRequired,
-    _handleSelectPosition: PropTypes.func.isRequired,
-  }
-
   state = {
     positions: [],
     isPositionListShown: false
@@ -50,11 +44,24 @@ export default class UserPosition extends Component {
     this.setState(({ isPositionListShown }) => ({
       isPositionListShown: !isPositionListShown
     }));
+    this.props.form.setTouched({
+      ...this.props.form.touched,
+      position_id: true,
+      positionName: true,
+    });
   };
+
+  _handleSelectPosition = (event) => {
+    this.props.form.setValues({
+      ...this.props.form.values,
+      position_id: event.target.dataset.positionId,
+      positionName: event.target.textContent,
+    });
+  }
 
   render() {
     const { positions, isPositionListShown } = this.state;
-    const { position_id, positionName, _handleSelectPosition } = this.props;
+    const { position_id, positionName } = this.props.form.values;
 
     const positionListStyle = cx(Styles.positionList, {
       [Styles.hideMenu]: !isPositionListShown
@@ -74,7 +81,7 @@ export default class UserPosition extends Component {
           className={style}
           key={position.id}
           data-position-id={position.id}
-          onClick={_handleSelectPosition}
+          onClick={this._handleSelectPosition}
         >
           {position.name}
         </div>
@@ -84,7 +91,6 @@ export default class UserPosition extends Component {
     return (
       <div
         className={Styles.userPosition}
-        id="positions"
         onClick={this._handleShowPositionList}
       >
         <div className={Styles.positionListHeader}>

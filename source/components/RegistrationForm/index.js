@@ -1,15 +1,17 @@
 // Core
 import React, { Component } from "react";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
 // Instruments
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import cx from "classnames";
-import { API_URL as URL } from "./../../instruments/helpers";
+import { schema, API_URL as URL } from "./../../instruments/helpers";
 import Styles from "./styles.m.css";
 
 //Components
 import UserPosition from "./UserPosition";
+import FileUploadInput from "./FileUploadInput";
 
 export default class RegistrationForm extends Component {
   static propTypes = {
@@ -18,13 +20,6 @@ export default class RegistrationForm extends Component {
 
   state = {
     token: "",
-    name: "",
-    email: "",
-    phone: "",
-    position_id: "",
-    positionName: "",
-    photo: null,
-    displayErrors: false
   };
 
   componentDidMount() {
@@ -52,69 +47,8 @@ export default class RegistrationForm extends Component {
     }
   };
 
-  _handleName = event => {
-    this.setState({
-      name: event.target.value.trim()
-    });
-  };
-
-  _handleEmail = event => {
-    this.setState({
-      email: event.target.value.trim()
-    });
-  };
-
-  _handlePhone = event => {
-    this.setState({
-      phone: event.target.value.trim()
-    });
-  };
-
-  _handleSelectPosition = event => {
-    const position_id = event.target.dataset.positionId;
-    const positionName = event.target.textContent;
-    this.setState({
-      position_id,
-      positionName
-    });
-  };
-
-  _handleFileUpload = event => {
-    const file = event.target.files[0];
-    const extension = file.type.slice(-4);
-    const img = new Image();
-
-    img.onload = function() {
-      const [width, height] = [img.width, img.height];
-      if (width >= 70 && height >= 70) {
-        saveFileToState();
-      }
-    };
-    img.src = window.URL.createObjectURL(file);
-
-    const saveFileToState = () => {
-      if (file.size <= 5242880 && extension === "jpeg") {
-        this.setState({
-          photo: file
-        });
-      }
-    };
-  };
-
-  _handleInvalid = event => {
-    if (!event.target.validity.valid) {
-      this.setState({
-        displayErrors: true
-      });
-    }
-  };
-
-  _handleSubmit = async event => {
-    event.preventDefault();
-    this.setState({
-      displayErrors: false
-    });
-    const { token, name, email, phone, position_id, photo } = this.state;
+  _handleSubmit = async({name, email, phone, position_id, photo}, {setSubmitting, setValues, setTouched}) => {
+    const { token } = this.state;
     const url = `${URL}/users`;
 
     const formData = new FormData();
@@ -127,9 +61,9 @@ export default class RegistrationForm extends Component {
     try {
       const response = await axios({
         method: "POST",
-        url: url,
+        url,
         headers: {
-          token: token,
+          token,
           "Content-Type": "multipart/form-data"
         },
         data: formData
@@ -137,36 +71,24 @@ export default class RegistrationForm extends Component {
 
       if (response.status === 201) {
         this.props._handleOpenModalAndFetch();
-        this.setState(prevState => ({
-          ...prevState,
-          name: "",
-          email: "",
-          phone: "",
-          position_id: "",
-          positionName: "",
-          photo: null
-        }));
+        setValues({
+          name: '',
+          email: '',
+          phone: '',
+          position_id: '',
+          positionName: '',
+          photo: '',
+        });
+        setTouched({}) 
+        setSubmitting(false);
       }
     } catch (err) {
+      setSubmitting(false);
       console.error(err.message);
     }
   };
 
   render() {
-    const {
-      name,
-      email,
-      phone,
-      position_id,
-      positionName,
-      photo,
-      displayErrors
-    } = this.state;
-    const isFormFilled = name && email && phone && position_id && photo;
-    const formStyle = cx({
-      [Styles.displayErrors]: displayErrors
-    });
-
     return (
       <section id="signup" className={Styles.registrationForm}>
         <div className="container">
@@ -175,81 +97,109 @@ export default class RegistrationForm extends Component {
             Attention! After successful registration and alert, update the list
             of users in the block from the top
           </h4>
-          <form
-            id="userForm"
-            className={formStyle}
-            onInvalid={this._handleInvalid}
-            onSubmit={this._handleSubmit}
+
+          <Formik
+            initialValues={{
+              name: '',
+              email: '',
+              phone: '',
+              position_id: '',
+              positionName: '',
+              photo: '',
+            }}
+            validationSchema={schema}
+            onSubmit={this._handleSubmit} 
           >
-            <div className={Styles.formContainer}>
-              <div className={Styles.inputTextWrapper}>
-                <input
-                  id="name"
-                  type="text"
-                  placeholder="Your name"
-                  pattern="[a-zA-Z]{2,60}"
-                  required
-                  value={name}
-                  onChange={this._handleName}
-                />
-                <label htmlFor="name">Name</label>
-              </div>
+            {({ values, errors, touched, handleChange }) => {
+              const inputFileStyle = cx(Styles.inputFileWrapper, {
+                [Styles.positionAndFileError]: errors.photo && touched.photo
+              });
 
-              <div className={Styles.inputTextWrapper}>
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="Your email"
-                  pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
-                  required
-                  value={email}
-                  onChange={this._handleEmail}
-                />
-                <label htmlFor="email">Email</label>
-              </div>
+              const positionStyle = cx(Styles.userPositionWrapper, {
+                [Styles.positionAndFileError]: errors.position_id && touched.position_id
+              });
 
-              <div className={Styles.inputTextWrapper}>
-                <input
-                  id="phone"
-                  type="tel"
-                  placeholder="+38 (___) ___ __ __"
-                  pattern="^[\+]{0,1}380([0-9]{9})$"
-                  required
-                  value={phone}
-                  onChange={this._handlePhone}
-                />
-                <label htmlFor="phone">Phone</label>
-              </div>
+              const isFormFilled = !(Object.keys(touched).length === 6) || Object.keys(errors).length;
 
-              <UserPosition
-                position_id={position_id}
-                positionName={positionName}
-                _handleSelectPosition={this._handleSelectPosition}
-              />
+              return (
+                <Form>
+                  <div className={Styles.formContainer}>
+                    <div className={Styles.inputTextWrapper}>
+                      <Field
+                        className={errors.name && touched.name && Styles.inputTextError}
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="Your name"
+                        value={values.name}
+                        onChange={handleChange}
+                      />
+                      <label htmlFor="name">Name</label>
+                      <ErrorMessage name="name" className={Styles.errorText} component="div" /> 
+                    </div>
 
-              <div className={Styles.inputFileWrapper}>
-                <input
-                  id="fileUpload"
-                  className={Styles.fileInput}
-                  type="file"
-                  required
-                  onChange={this._handleFileUpload}
-                  accept=".jpg,.jpeg"
-                />
-                <span className={Styles.fileName}>
-                  {photo ? photo.name : "Upload your photo"}
-                </span>
-                <label htmlFor="fileUpload" className={Styles.fileUpload}>
-                  Upload
-                </label>
-                <span className={Styles.fileUploadAssistiveText}>
-                  File format jpg up to 5 MB, the minimum size of 70x70px
-                </span>
-              </div>
-            </div>
+                    <div className={Styles.inputTextWrapper}>
+                      <Field
+                        className={errors.email && touched.email && Styles.inputTextError}
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="Your email"
+                        value={values.email}
+                        onChange={handleChange}
+                      />
+                      <label htmlFor="email">Email</label>
+                      <ErrorMessage name="email" className={Styles.errorText} component="div" /> 
+                    </div>
 
-            <input disabled={!isFormFilled} type="submit" value="Sign Up" />
-          </form>
+                    <div className={Styles.inputTextWrapper}>
+                      <Field
+                        className={errors.phone && touched.phone && Styles.inputTextError}
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        placeholder="+38 (___) ___ __ __"
+                        value={values.phone}
+                        onChange={handleChange}
+                      />
+                      <label htmlFor="phone">Phone</label>
+                      <ErrorMessage name="phone" className={Styles.errorText} component="div" /> 
+                    </div>
+
+                    <div className={positionStyle}>
+                      <Field
+                        name="position_id"
+                        component={UserPosition}
+                      />
+                      <ErrorMessage name="position_id" className={Styles.errorText} component="div" /> 
+                    </div>
+
+                    <div className={inputFileStyle}>
+                      <Field
+                        name="photo"
+                        component={FileUploadInput}
+                      />
+                      <span className={Styles.fileName}>
+                        {values.photo ? values.photo.name : "Upload your photo"}
+                      </span>
+                      <label htmlFor="photo" className={Styles.fileUpload}>
+                        Upload
+                      </label>
+                      {errors.photo && touched.photo 
+                        ? <ErrorMessage name="photo" className={Styles.errorText} component="div" />
+                        : (
+                            <span className={Styles.fileUploadAssistiveText}>
+                              File format jpg up to 5 MB, the minimum size of 70x70px
+                            </span>
+                          )
+                      }
+                    </div>
+                  </div>
+                  <input disabled={isFormFilled} type="submit" value="Sign Up" />
+                </Form>
+              )
+            }}
+          </Formik>
         </div>
       </section>
     );
