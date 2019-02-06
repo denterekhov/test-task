@@ -2,6 +2,9 @@
 
 .fileUploadInput {
   position: absolute;
-  opacity: 0;
-  font-size: 0;
+
+  & input {
+    opacity: 0;
+    font-size: 0;
+  }
 }

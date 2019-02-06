@@ -1,10 +1,9 @@
 // Core
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import { func } from "prop-types";
 
 // Instruments
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import axios from "axios";
 import cx from "classnames";
 import { schema, API_URL as URL } from "./../../instruments/helpers";
 import Styles from "./styles.m.css";
@@ -15,7 +14,8 @@ import FileUploadInput from "./FileUploadInput";
 
 export default class RegistrationForm extends Component {
   static propTypes = {
-    _handleOpenModalAndFetch: PropTypes.func.isRequired,
+    _handleOpenModalAndFetch: func.isRequired,
+    _setIsFetching: func.isRequired,
   }
 
   state = {
@@ -29,15 +29,10 @@ export default class RegistrationForm extends Component {
   _fetchToken = async () => {
     const url = `${URL}/token`;
     try {
-      const response = await axios({
-        method: "GET",
-        url
-      });
+      const response = await fetch(url);
 
       if (response.status === 200) {
-        const {
-          data: { token }
-        } = response;
+        const { token } = await response.json();
         this.setState({
           token
         });
@@ -47,10 +42,12 @@ export default class RegistrationForm extends Component {
     }
   };
 
-  _handleSubmit = async({name, email, phone, position_id, photo}, {setSubmitting, setValues, setTouched}) => {
+  _handleSubmit = async({name, email, phone, position_id, photo}, {setSubmitting, setValues, setTouched, setErrors}) => {
     const { token } = this.state;
+    const { _setIsFetching } = this.props;
     const url = `${URL}/users`;
 
+    _setIsFetching(true);
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
@@ -59,14 +56,12 @@ export default class RegistrationForm extends Component {
     formData.append("photo", photo);
 
     try {
-      const response = await axios({
+      const response = await fetch(url, {
         method: "POST",
-        url,
         headers: {
           token,
-          "Content-Type": "multipart/form-data"
         },
-        data: formData
+        body: formData
       });
 
       if (response.status === 201) {
@@ -80,11 +75,19 @@ export default class RegistrationForm extends Component {
           photo: '',
         });
         setTouched({}) 
-        setSubmitting(false);
+      }
+
+      if (response.status === 409) {
+        setErrors({
+          email: 'User with this phone or email already exist',
+          phone: 'User with this phone or email already exist',
+        }) 
       }
     } catch (err) {
-      setSubmitting(false);
       console.error(err.message);
+    } finally {
+      setSubmitting(false);
+      _setIsFetching(false);
     }
   };
 

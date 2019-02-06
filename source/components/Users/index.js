@@ -1,6 +1,6 @@
 // Core
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
+import { array, string, func } from 'prop-types';
 import ReactOverflowTooltip from 'react-overflow-tooltip';
 
 // Instruments
@@ -8,9 +8,9 @@ import Styles from "./styles.m.css";
 
 export default class Users extends Component {
   static propTypes = {
-    users: PropTypes.array.isRequired,
-    nextUrl: PropTypes.string.isRequired,
-    _usersFetch: PropTypes.func.isRequired,
+    users: array.isRequired,
+    nextUrl: string.isRequired,
+    _usersFetch: func.isRequired,
   }
 
   componentDidMount() {

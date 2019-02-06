@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 
 // Instruments
-import axios from "axios";
 import cx from "classnames";
 import { API_URL as URL } from "./../../instruments/helpers";
 import Logo from "../../theme/assets/icons/logo.svg";
@@ -26,16 +25,11 @@ export default class Header extends Component {
   _fetchCurrentUser = async () => {
     const url = `${URL}/users/1`;
     try {
-      const response = await axios({
-        method: "GET",
-        url
-      });
+      const response = await fetch(url);
       if (response.status === 200) {
         const {
-          data: {
-            user: { email, name, photo }
-          }
-        } = response;
+          user: { email, name, photo }
+        } = await response.json();
         this.setState({
           email,
           name,

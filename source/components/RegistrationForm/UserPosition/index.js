@@ -1,10 +1,8 @@
 // Core
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
 // Instruments
 import cx from "classnames";
-import axios from "axios";
 import caretDown from "../../../theme/assets/icons/caret-down.svg";
 import { API_URL as URL } from "../../../instruments/helpers";
 import Styles from "./styles.m.css";
@@ -22,15 +20,9 @@ export default class UserPosition extends Component {
   _fetchUserPositions = async () => {
     const url = `${URL}/positions`;
     try {
-      const response = await axios({
-        method: "GET",
-        url
-      });
-
+      const response = await fetch(url);
       if (response.status === 200) {
-        const {
-          data: { positions }
-        } = response;
+        const { positions } = await response.json();
         this.setState({
           positions: [...positions]
         });

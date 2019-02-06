@@ -3,13 +3,13 @@ import "@babel/polyfill";
 import React, { Component } from "react";
 
 // Instruments
-import axios from "axios";
 import { hot } from "react-hot-loader";
 import Modal from "react-modal";
 import { API_URL as URL } from "./../../instruments/helpers";
 import Styles from "./styles.m.css";
 
 //Components
+import Spinner from "components/Spinner";
 import Header from "components/Header";
 import Assignment from "components/Assignment";
 import About from "components/About";
@@ -28,6 +28,7 @@ export default class App extends Component {
     users: [],
     nextUrl: "",
     numberOfDisplayedUsers: null,
+    isFetching: false,
   };
 
   componentDidMount = async() => {
@@ -40,23 +41,25 @@ export default class App extends Component {
     });
   };
 
+  _setIsFetching = (isFetching) => {
+    this.setState({ 
+      isFetching,
+    });
+  };
+
   _usersFetch = async event => {
     if (event) event.preventDefault();
     const { nextUrl, numberOfDisplayedUsers } = this.state;
     const url = nextUrl ? nextUrl : `${URL}/users?page=1&count=${numberOfDisplayedUsers}`;
-    try {
-      const response = await axios({
-        method: "GET",
-        url
-      });
 
+    this._setIsFetching(true);
+    try {
+      const response = await fetch(url);
       if (response.status === 200) {
         const {
-          data: {
-            users: newUsers,
-            links: { next_url: nextUrl }
-          }
-        } = response;
+          users: newUsers,
+          links: { next_url: nextUrl }
+        } = await response.json();
         this.setState(({ users }) => ({
           users: [...users, ...newUsers],
           nextUrl
@@ -64,6 +67,8 @@ export default class App extends Component {
       }
     } catch (err) {
       console.error(err.message);
+    } finally {
+      this._setIsFetching(false);
     }
   };
 
@@ -72,18 +77,12 @@ export default class App extends Component {
     const { numberOfDisplayedUsers } = this.state;
     const url = `${URL}/users?page=1&count=${numberOfDisplayedUsers}`;
     try {
-      const response = await axios({
-        method: "GET",
-        url
-      });
-
+      const response = await fetch(url);
       if (response.status === 200) {
         const {
-          data: {
-            users,
-            links: { next_url: nextUrl }
-          }
-        } = response;
+          users,
+          links: { next_url: nextUrl }
+        } = await response.json();
         this.setState({
           users,
           nextUrl,
@@ -102,32 +101,40 @@ export default class App extends Component {
   };
 
   render() {
-    const { showModal, users, nextUrl, numberOfDisplayedUsers } = this.state;
+    const { showModal, users, nextUrl, numberOfDisplayedUsers, isFetching } = this.state;
     return (
-            <>
-              <Modal
-                isOpen={showModal}
-                onRequestClose={this._handleCloseModal}
-                className={Styles.modal}
-                overlayClassName={Styles.overlay}
-              >
-                <h4>Congratulations</h4>
-                <p>You have successfully passed the registration</p>
-                <a href="#" onClick={this._handleCloseModal}>
-                  OK
-                </a>
-              </Modal>
-              <Header />
-              <Assignment />
-              <About />
-              <Relationships />
-              <Requirements />
-              {numberOfDisplayedUsers && <Users users={users} nextUrl={nextUrl} _usersFetch={this._usersFetch} />}
-              <RegistrationForm
-                _handleOpenModalAndFetch={this._handleOpenModalAndFetch}
-              />
-              <Footer />
-            </>
-    )
+      <>
+        <Modal
+          isOpen={showModal}
+          onRequestClose={this._handleCloseModal}
+          className={Styles.modal}
+          overlayClassName={Styles.overlay}
+        >
+          <h4>Congratulations</h4>
+          <p>You have successfully passed the registration</p>
+          <a href="#" onClick={this._handleCloseModal}>
+            OK
+          </a>
+        </Modal>
+        <Spinner isFetching={isFetching} />
+        <Header />
+        <Assignment />
+        <About />
+        <Relationships />
+        <Requirements />
+        {numberOfDisplayedUsers && (
+          <Users
+            users={users}
+            nextUrl={nextUrl}
+            _usersFetch={this._usersFetch}
+          />
+        )}
+        <RegistrationForm
+          _handleOpenModalAndFetch={this._handleOpenModalAndFetch}
+          _setIsFetching={this._setIsFetching}
+        />
+        <Footer />
+      </>
+    );
   }
 }
