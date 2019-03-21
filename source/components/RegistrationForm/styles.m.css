@@ -1,5 +1,20 @@
 @import '../../theme/breakpoints';
 
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
 .registrationForm {
   height: 700px;
   padding-top: 165px;
@@ -81,6 +96,8 @@
 
     & .inputTextError {
       border: 1px solid #f00;
+      animation: 1.5s shake;
+
       &:focus {
         border: 2px solid #f00;
       }

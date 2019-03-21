@@ -43,6 +43,12 @@ export default class UserPosition extends Component {
     });
   };
 
+  _handleMouseLeave = () => {
+    this.setState({
+      isPositionListShown: false,
+    });
+  };
+
   _handleSelectPosition = (event) => {
     this.props.form.setValues({
       ...this.props.form.values,
@@ -84,6 +90,7 @@ export default class UserPosition extends Component {
       <div
         className={Styles.userPosition}
         onClick={this._handleShowPositionList}
+        onMouseLeave={this._handleMouseLeave}
       >
         <div className={Styles.positionListHeader}>
           {positionName ? positionName : "Select your position"}

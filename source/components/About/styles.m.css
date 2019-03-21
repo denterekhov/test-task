@@ -21,8 +21,8 @@
     & .manMobile {
       width: 31%;
       height: 285px;
-      background-size: contain;
       background: url(../../theme/assets/man-mobile.svg) no-repeat;
+      background-size: contain;
     }
     
     & .mySkills {

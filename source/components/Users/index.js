@@ -21,7 +21,13 @@ export default class Users extends Component {
     const { users, nextUrl, _usersFetch } = this.props;
     const userList = users.map(user => {
       const { id, email, name, phone, photo, position } = user;
-      const formattedPhoneNumber = `${phone.slice(0, 3)} (${phone.slice(3, 6)}) ${phone.slice(6, 9)} ${phone.slice(9, 11)} ${phone.slice(11, 13)}`;
+      const formattedPhoneNumber = `
+        ${phone.slice(0, 3)} 
+        (${phone.slice(3, 6)}) 
+        ${phone.slice(6, 9)} 
+        ${phone.slice(9, 11)} 
+        ${phone.slice(11, 13)}
+      `;
       return (
         <div className={Styles.userItem} key={id}>
           <div className={Styles.userPhotoContainer}>
