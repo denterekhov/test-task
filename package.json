@@ -1,0 +1,10 @@
+{
+ "name": "test",
+ "version": "1.0.0",
+ "description": "testtask",
+ "author": "Den",
+ "private": true,
+ "scripts": {
+   "postinstall": "npm install express compression"
+ }
+}
