@@ -1,29 +1,29 @@
 // Core
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 // Instruments
-import Styles from "./styles.m.css";
+import Styles from './styles.m.css';
 
 export default class Relationships extends Component {
-  render() {
+  render () {
     return (
-      <section id="relationships" className={Styles.relationships}>
-        <div className="container">
+      <section className = { Styles.relationships } id = 'relationships'>
+        <div className = 'container'>
           <h2>About my relationships with web-development</h2>
-          <div className={Styles.flex_container}>
-            <div className={Styles.skillContainer}>
-              <div className={Styles.htmlPic} />
-              <div className={Styles.skillInfo}>
-                <h3>I'm in love with HTML</h3>
+          <div className = { Styles.flex_container }>
+            <div className = { Styles.skillContainer }>
+              <div className = { Styles.htmlPic } />
+              <div className = { Styles.skillInfo }>
+                <h3>I&apos;m in love with HTML</h3>
                 <p>
                   Hypertext Markup Language (HTML) is the standard markup
                   language for creating web pages and web applications.
                 </p>
               </div>
             </div>
-            <div className={Styles.skillContainer}>
-              <div className={Styles.cssPic} />
-              <div className={Styles.skillInfo}>
+            <div className = { Styles.skillContainer }>
+              <div className = { Styles.cssPic } />
+              <div className = { Styles.skillInfo }>
                 <h3>CSS is my best friend</h3>
                 <p>
                   Cascading Style Sheets (CSS) is a style sheet language used
@@ -32,9 +32,9 @@ export default class Relationships extends Component {
                 </p>
               </div>
             </div>
-            <div className={Styles.skillContainer}>
-              <div className={Styles.jsPic} />
-              <div className={Styles.skillInfo}>
+            <div className = { Styles.skillContainer }>
+              <div className = { Styles.jsPic } />
+              <div className = { Styles.skillInfo }>
                 <h3>JavaScript is my passion</h3>
                 <p>
                   JavaScript is a high-level, interpreted programming language.

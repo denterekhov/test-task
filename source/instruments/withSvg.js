@@ -1,9 +1,9 @@
 // Core
-import React, { Component } from "react";
-import { number } from "prop-types";
+import React, { Component } from 'react';
+import { number } from 'prop-types';
 
 // Instruments
-import { getDisplayName } from "./";
+import { getDisplayName } from './';
 
 const decorateSvg = (
   { viewBoxWidth = 0, viewBoxHeight = 0, width = 0, height = 0 } = {},
@@ -12,17 +12,17 @@ const decorateSvg = (
   class withSvg extends Component {
     static propTypes = {
       height: number.isRequired,
-      width: number.isRequired
+      width:  number.isRequired,
     };
 
     static defaultProps = {
-      color2: "#f00",
+      color2: '#f00',
       width,
-      height
+      height,
     };
 
     state = {
-      hover: false
+      hover: false,
     };
 
     _getEnhanceableProps = () => {
@@ -35,54 +35,49 @@ const decorateSvg = (
     };
 
     _getSvgStyle = () => ({
-      width: this.props.width,
-      height: this.props.height
-      // display: 'block',
+      width:  this.props.width,
+      height: this.props.height,
     });
 
     _getWrapperStyle = () => {
-      // const { inlineBlock } = this.props;
 
       return {
-        width: this.props.width,
-        height: this.props.height
-        // display: inlineBlock ? 'inline-block' : 'block',
+        width:  this.props.width,
+        height: this.props.height,
       };
     };
 
     _handleMouseEnter = () => {
       this.setState({
-        hover: true
+        hover: true,
       });
     };
 
     _handleMouseLeave = () => {
       this.setState({
-        hover: false
+        hover: false,
       });
     };
 
-    render() {
+    render () {
       const { className, disabled } = this.props;
-      const anchorClassName = disabled ? "disabledLink" : null;
+      const anchorClassName = disabled ? 'disabledLink' : null;
       const wrapperStyle = this._getWrapperStyle();
       const svgStyle = this._getSvgStyle();
       const enhanceableProps = this._getEnhanceableProps();
 
       return (
         <div
-          className={className}
-          style={wrapperStyle}
-          onMouseEnter={disabled ? null : this._handleMouseEnter}
-          onMouseLeave={disabled ? null : this._handleMouseLeave}
-        >
-          <a className={anchorClassName} href="#">
+          className = { className }
+          style = { wrapperStyle }
+          onMouseEnter = { disabled ? null : this._handleMouseEnter }
+          onMouseLeave = { disabled ? null : this._handleMouseLeave }>
+          <a className = { anchorClassName } href = '#'>
             <svg
-              style={svgStyle}
-              version="1.1"
-              viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
-            >
-              <Enhanceable {...enhanceableProps} />
+              style = { svgStyle }
+              version = '1.1'
+              viewBox = { `0 0 ${viewBoxWidth} ${viewBoxHeight}` }>
+              <Enhanceable { ...enhanceableProps } />
             </svg>
           </a>
         </div>
@@ -95,5 +90,5 @@ const decorateSvg = (
   return withSvg;
 };
 
-export const withSvg = config => Enhanceable =>
+export const withSvg = (config) => (Enhanceable) =>
   decorateSvg(config, Enhanceable);

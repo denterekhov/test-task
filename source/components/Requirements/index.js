@@ -1,16 +1,16 @@
 // Core
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 // Instruments
-import Styles from "./styles.m.css";
+import Styles from './styles.m.css';
 
 export default class Requirements extends Component {
-  render() {
+  render () {
     return (
-      <section id="requirements" className={Styles.requirements}>
-        <div className="container">
+      <section className = { Styles.requirements } id = 'requirements'>
+        <div className = 'container'>
           <h2>General requirements for the test task</h2>
-          <div className={Styles.flex_container}>
+          <div className = { Styles.flex_container }>
             <div>
               <p>
                 Users want to find answers to their questions quickly and data
@@ -20,7 +20,7 @@ export default class Requirements extends Component {
                 page speed will be a ranking factor for mobile searches too.
               </p>
               <p>
-                If you're a developer working on a site, now is a good time to
+                If you&apos;re a developer working on a site, now is a good time to
                 evaluate your performance using our speed tools. Think about how
                 performance affects the user experience of your pages and
                 consider measuring a variety of real-world user-centric
@@ -35,7 +35,7 @@ export default class Requirements extends Component {
                 real-world conditions.
               </p>
             </div>
-            <div className={Styles.manLaptop} />
+            <div className = { Styles.manLaptop } />
           </div>
         </div>
       </section>

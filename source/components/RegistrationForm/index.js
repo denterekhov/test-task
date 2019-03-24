@@ -1,40 +1,42 @@
 // Core
-import React, { Component } from "react";
-import { func } from "prop-types";
+import React, { Component } from 'react';
+import { func } from 'prop-types';
 
 // Instruments
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import cx from "classnames";
-import { schema, API_URL as URL } from "./../../instruments/helpers";
-import Styles from "./styles.m.css";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import cx from 'classnames';
+import { schema, API_URL as URL } from './../../instruments/helpers';
+import Styles from './styles.m.css';
 
 //Components
-import UserPosition from "./UserPosition";
-import FileUploadInput from "./FileUploadInput";
+import UserPosition from './UserPosition';
+import FileUploadInput from './FileUploadInput';
 
 export default class RegistrationForm extends Component {
   static propTypes = {
     _handleOpenModalAndFetch: func.isRequired,
-    _setIsFetching: func.isRequired,
-  }
-
-  state = {
-    token: "",
+    _setIsFetching:           func.isRequired,
   };
 
-  componentDidMount() {
+  state = {
+    token: '',
+  };
+
+  componentDidMount () {
     this._fetchToken();
   }
 
   _fetchToken = async () => {
     const url = `${URL}/token`;
+
     try {
       const response = await fetch(url);
 
       if (response.status === 200) {
         const { token } = await response.json();
+
         this.setState({
-          token
+          token,
         });
       }
     } catch (err) {
@@ -42,46 +44,50 @@ export default class RegistrationForm extends Component {
     }
   };
 
-  _handleSubmit = async({name, email, phone, position_id, photo}, {setSubmitting, setValues, setTouched, setErrors}) => {
+  _handleSubmit = async (
+    { name, email, phone, positionId, photo },
+    { setSubmitting, setValues, setTouched, setErrors }
+  ) => {
     const { token } = this.state;
     const { _setIsFetching } = this.props;
     const url = `${URL}/users`;
 
     _setIsFetching(true);
     const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("position_id", position_id);
-    formData.append("photo", photo);
+
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('phone', phone);
+    formData.append('position_id', positionId);
+    formData.append('photo', photo);
 
     try {
       const response = await fetch(url, {
-        method: "POST",
+        method:  'POST',
         headers: {
           token,
         },
-        body: formData
+        body: formData,
       });
 
       if (response.status === 201) {
         this.props._handleOpenModalAndFetch();
         setValues({
-          name: '',
-          email: '',
-          phone: '',
-          position_id: '',
+          name:         '',
+          email:        '',
+          phone:        '',
+          positionId:   '',
           positionName: '',
-          photo: '',
+          photo:        '',
         });
-        setTouched({}) 
+        setTouched({});
       }
 
       if (response.status === 409) {
         setErrors({
           email: 'User with this phone or email already exist',
           phone: 'User with this phone or email already exist',
-        }) 
+        });
       }
     } catch (err) {
       console.error(err.message);
@@ -91,10 +97,10 @@ export default class RegistrationForm extends Component {
     }
   };
 
-  render() {
+  render () {
     return (
-      <section id="signup" className={Styles.registrationForm}>
-        <div className="container">
+      <section className = { Styles.registrationForm } id = 'signup'>
+        <div className = 'container'>
           <h2>Register to get a work</h2>
           <h4>
             Attention! After successful registration and alert, update the list
@@ -102,105 +108,131 @@ export default class RegistrationForm extends Component {
           </h4>
 
           <Formik
-            initialValues={{
-              name: '',
-              email: '',
-              phone: '',
-              position_id: '',
+            initialValues = { {
+              name:         '',
+              email:        '',
+              phone:        '',
+              positionId:   '',
               positionName: '',
-              photo: '',
-            }}
-            validationSchema={schema}
-            onSubmit={this._handleSubmit} 
-          >
+              photo:        '',
+            } }
+            validationSchema = { schema }
+            onSubmit = { this._handleSubmit }>
             {({ values, errors, touched, handleChange }) => {
               const inputFileStyle = cx(Styles.inputFileWrapper, {
-                [Styles.positionAndFileError]: errors.photo && touched.photo
+                [Styles.positionAndFileError]: errors.photo && touched.photo,
               });
 
               const positionStyle = cx(Styles.userPositionWrapper, {
-                [Styles.positionAndFileError]: errors.position_id && touched.position_id
+                [Styles.positionAndFileError]:
+                  errors.positionId && touched.positionId,
               });
 
-              const isFormFilled = !(Object.keys(touched).length === 6) || Object.keys(errors).length;
+              const isFormFilled =
+                !(Object.keys(touched).length === 6) ||
+                Object.keys(errors).length;
 
               return (
                 <Form>
-                  <div className={Styles.formContainer}>
-                    <div className={Styles.inputTextWrapper}>
+                  <div className = { Styles.formContainer }>
+                    <div className = { Styles.inputTextWrapper }>
                       <Field
-                        className={errors.name && touched.name && Styles.inputTextError}
-                        id="name"
-                        name="name"
-                        type="text"
-                        placeholder="Your name"
-                        value={values.name}
-                        onChange={handleChange}
+                        className = {
+                          errors.name && touched.name && Styles.inputTextError
+                        }
+                        id = 'name'
+                        name = 'name'
+                        placeholder = 'Your name'
+                        type = 'text'
+                        value = { values.name }
+                        onChange = { handleChange }
                       />
-                      <label htmlFor="name">Name</label>
-                      <ErrorMessage name="name" className={Styles.errorText} component="div" /> 
+                      <label htmlFor = 'name'>Name</label>
+                      <ErrorMessage
+                        className = { Styles.errorText }
+                        component = 'div'
+                        name = 'name'
+                      />
                     </div>
 
-                    <div className={Styles.inputTextWrapper}>
+                    <div className = { Styles.inputTextWrapper }>
                       <Field
-                        className={errors.email && touched.email && Styles.inputTextError}
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="Your email"
-                        value={values.email}
-                        onChange={handleChange}
+                        className = {
+                          errors.email && touched.email && Styles.inputTextError
+                        }
+                        id = 'email'
+                        name = 'email'
+                        placeholder = 'Your email'
+                        type = 'email'
+                        value = { values.email }
+                        onChange = { handleChange }
                       />
-                      <label htmlFor="email">Email</label>
-                      <ErrorMessage name="email" className={Styles.errorText} component="div" /> 
+                      <label htmlFor = 'email'>Email</label>
+                      <ErrorMessage
+                        className = { Styles.errorText }
+                        component = 'div'
+                        name = 'email'
+                      />
                     </div>
 
-                    <div className={Styles.inputTextWrapper}>
+                    <div className = { Styles.inputTextWrapper }>
                       <Field
-                        className={errors.phone && touched.phone && Styles.inputTextError}
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        placeholder="+38 (___) ___ __ __"
-                        value={values.phone}
-                        onChange={handleChange}
+                        className = {
+                          errors.phone && touched.phone && Styles.inputTextError
+                        }
+                        id = 'phone'
+                        name = 'phone'
+                        placeholder = '+38 (___) ___ __ __'
+                        type = 'tel'
+                        value = { values.phone }
+                        onChange = { handleChange }
                       />
-                      <label htmlFor="phone">Phone</label>
-                      <ErrorMessage name="phone" className={Styles.errorText} component="div" /> 
+                      <label htmlFor = 'phone'>Phone</label>
+                      <ErrorMessage
+                        className = { Styles.errorText }
+                        component = 'div'
+                        name = 'phone'
+                      />
                     </div>
 
-                    <div className={positionStyle}>
-                      <Field
-                        name="position_id"
-                        component={UserPosition}
+                    <div className = { positionStyle }>
+                      <Field component = { UserPosition } name = 'positionId' />
+                      <ErrorMessage
+                        className = { Styles.errorText }
+                        component = 'div'
+                        name = 'positionId'
                       />
-                      <ErrorMessage name="position_id" className={Styles.errorText} component="div" /> 
                     </div>
 
-                    <div className={inputFileStyle}>
-                      <Field
-                        name="photo"
-                        component={FileUploadInput}
-                      />
-                      <span className={Styles.fileName}>
-                        {values.photo ? values.photo.name : "Upload your photo"}
+                    <div className = { inputFileStyle }>
+                      <Field component = { FileUploadInput } name = 'photo' />
+                      <span className = { Styles.fileName }>
+                        {values.photo ? values.photo.name : 'Upload your photo'}
                       </span>
-                      <label htmlFor="photo" className={Styles.fileUpload}>
+                      <label className = { Styles.fileUpload } htmlFor = 'photo'>
                         Upload
                       </label>
-                      {errors.photo && touched.photo 
-                        ? <ErrorMessage name="photo" className={Styles.errorText} component="div" />
-                        : (
-                            <span className={Styles.fileUploadAssistiveText}>
-                              File format jpg up to 5 MB, the minimum size of 70x70px
-                            </span>
-                          )
-                      }
+                      {errors.photo && touched.photo ? (
+                        <ErrorMessage
+                          className = { Styles.errorText }
+                          component = 'div'
+                          name = 'photo'
+                        />
+                      ) : (
+                        <span className = { Styles.fileUploadAssistiveText }>
+                          File format jpg up to 5 MB, the minimum size of
+                          70x70px
+                        </span>
+                      )}
                     </div>
                   </div>
-                  <input disabled={isFormFilled} type="submit" value="Sign Up" />
+                  <input
+                    disabled = { isFormFilled }
+                    type = 'submit'
+                    value = 'Sign Up'
+                  />
                 </Form>
-              )
+              );
             }}
           </Formik>
         </div>
