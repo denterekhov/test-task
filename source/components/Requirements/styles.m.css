@@ -1,7 +1,7 @@
 @import '../../theme/breakpoints';
 
 .requirements {
-  height: 755px;
+  min-height: 755px;
   padding-top: 140px;
   overflow: hidden;
   background-image: url(../../theme/assets/bg-2.jpg?size=2560);

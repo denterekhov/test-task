@@ -142,6 +142,7 @@ export default class App extends Component {
         {numberOfDisplayedUsers && (
           <Users
             _usersFetch = { this._usersFetch }
+            isFetching = { isFetching }
             nextUrl = { nextUrl }
             users = { users }
           />

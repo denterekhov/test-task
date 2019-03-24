@@ -89,6 +89,13 @@
     line-height: 34px;
     text-decoration: none;
   }
+
+  & .isDisabled {
+    pointer-events: none;
+    color: #8d8c8c;
+    border: 2px solid #8d8c8c;
+  }
+
   @media(--tablet) {
     padding-top: 120px;
 

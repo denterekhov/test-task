@@ -98,12 +98,14 @@ export default class Header extends Component {
                     <p>{name}</p>
                     <a href = { `mailto:${email}` }>{email}</a>
                   </div>
-                  <img
-                    alt = 'User'
-                    className = { Styles.userAvatar }
-                    src = { photo }
-                    srcSet = { `${photo} 1x, ${photo} 2x` }
-                  />
+                  <div className = { Styles.userAvatar }>
+                    <img
+                      alt = 'User'
+                      className = { Styles.userAvatar }
+                      src = { photo }
+                      srcSet = { `${photo} 1x, ${photo} 2x` }
+                    />
+                  </div>
                   <LogOut
                     className = { Styles.logoutButtonStyle }
                     color1 = '#283593'

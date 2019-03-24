@@ -1,15 +1,16 @@
 // Core
 import React, { Component } from 'react';
-import { array, string, func } from 'prop-types';
+import { array, bool, func } from 'prop-types';
 import ReactOverflowTooltip from 'react-overflow-tooltip';
 
 // Instruments
+import cx from 'classnames';
 import Styles from './styles.m.css';
 
 export default class Users extends Component {
   static propTypes = {
     _usersFetch: func.isRequired,
-    nextUrl:     string.isRequired,
+    isFetching:  bool.isRequired,
     users:       array.isRequired,
   };
 
@@ -18,7 +19,11 @@ export default class Users extends Component {
   }
 
   render () {
-    const { users, nextUrl, _usersFetch } = this.props;
+    const { users, nextUrl, _usersFetch, isFetching } = this.props;
+    const fetchMoreUsersStyle = cx(Styles.getMoreUsers, {
+      [Styles.isDisabled]: isFetching,
+    });
+
     const userList = users.map((user) => {
       const { id, email, name, phone, photo, position } = user;
       const formattedPhoneNumber = `
@@ -60,7 +65,7 @@ export default class Users extends Component {
           <h4>Attention! Sorting users by registration date</h4>
           <div className = { Styles.userList }>{userList}</div>
           {nextUrl && (
-            <a className = { Styles.getMoreUsers } href = '#' onClick = { _usersFetch }>
+            <a className = { fetchMoreUsersStyle } href = '#' onClick = { _usersFetch }>
               Show more
             </a>
           )}
