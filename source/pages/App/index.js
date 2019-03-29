@@ -9,15 +9,17 @@ import { API_URL as URL } from './../../instruments/helpers';
 import Styles from './styles.m.css';
 
 //Components
-import Spinner from 'components/Spinner';
-import Header from 'components/Header';
-import Assignment from 'components/Assignment';
-import About from 'components/About';
-import Relationships from 'components/Relationships';
-import Requirements from 'components/Requirements';
-import Users from 'components/Users';
-import RegistrationForm from 'components/RegistrationForm';
-import Footer from 'components/Footer';
+import {
+  Spinner,
+  Header,
+  Assignment,
+  About,
+  Relationships,
+  Requirements,
+  Users,
+  RegistrationForm,
+  Footer
+} from 'components';
 
 Modal.setAppElement('#app');
 
